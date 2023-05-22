@@ -10,14 +10,14 @@ public class NoMemberException extends RuntimeException {
      */
     private static final long serialVersionUID = 1291658484551919953L;
 
-    public NoMemberException () {super( "존재하는 계정이 없습니다." );}
+    public NoMemberException() {super("존재하는 계정이 없습니다.");}
 
-    public NoMemberException ( String msg, Throwable t ) {
-        super( msg, t );
+    public NoMemberException(String msg, Throwable t) {
+        super(msg, t);
     }
 
-    public NoMemberException ( String msg ) {
-        super( msg );
+    public NoMemberException(String msg) {
+        super(msg);
     }
 
 

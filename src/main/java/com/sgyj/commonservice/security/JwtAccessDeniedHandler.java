@@ -13,12 +13,10 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
     static String _403 = "{\"success\":false,\"response\":null,\"message\":\"Forbidden\",\"status\":403}";
 
     @Override
-    public void handle (
-        HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException
-    ) throws IOException {
-        response.setStatus( HttpServletResponse.SC_FORBIDDEN );
-        response.setHeader( "content-type", "application/json" );
-        response.getWriter().write( _403 );
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        response.setHeader("content-type", "application/json");
+        response.getWriter().write(_403);
         response.getWriter().flush();
         response.getWriter().close();
     }

@@ -4,7 +4,8 @@ package com.sgyj.commonservice.enums;
 public enum AccountRole implements EnumMapperType {
 
     ADMIN("관리자", false),  // 관리자
-    LEADER("모임장", false), USER("사용자", true),
+    LEADER("모임장", false),
+    USER("사용자", true),
     ;
 
     private final String role;

@@ -25,6 +25,7 @@ import org.springframework.util.Assert;
 
 /**
  * Querydsl 5.x 버전에 맞춘 Querydsl 지원 라이브러리
+ *
  * @see org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
  */
 @Slf4j
@@ -36,62 +37,62 @@ public abstract class Querydsl5Support {
     private EntityManager entityManager;
     private JPAQueryFactory queryFactory;
 
-    protected Querydsl5Support ( Class<?> domainClass ) {
-        Assert.notNull( domainClass, "Domain class must not be null!" );
+    protected Querydsl5Support(Class<?> domainClass) {
+        Assert.notNull(domainClass, "Domain class must not be null!");
         this.domainClass = domainClass;
     }
 
     @Autowired
-    public void setEntityManager ( EntityManager entityManager ) {
-        Assert.notNull( entityManager, "EntityManager must not be null!" );
-        JpaEntityInformation<?, ?> entityInformation = JpaEntityInformationSupport.getEntityInformation( domainClass, entityManager );
+    public void setEntityManager(EntityManager entityManager) {
+        Assert.notNull(entityManager, "EntityManager must not be null!");
+        JpaEntityInformation<?, ?> entityInformation = JpaEntityInformationSupport.getEntityInformation(domainClass, entityManager);
         SimpleEntityPathResolver resolver = SimpleEntityPathResolver.INSTANCE;
-        EntityPath<?> path = resolver.createPath( entityInformation.getJavaType() );
+        EntityPath<?> path = resolver.createPath(entityInformation.getJavaType());
         this.entityManager = entityManager;
-        this.querydsl = new Querydsl( entityManager, new PathBuilder<>( path.getType(), path.getMetadata() ) );
-        this.queryFactory = new JPAQueryFactory( entityManager );
+        this.querydsl = new Querydsl(entityManager, new PathBuilder<>(path.getType(), path.getMetadata()));
+        this.queryFactory = new JPAQueryFactory(entityManager);
     }
 
     @PostConstruct
-    public void validate () {
-        Assert.notNull( entityManager, "EntityManager must not be null!" );
-        Assert.notNull( querydsl, "Querydsl must not be null!" );
-        Assert.notNull( queryFactory, "QueryFactory must not be null!" );
+    public void validate() {
+        Assert.notNull(entityManager, "EntityManager must not be null!");
+        Assert.notNull(querydsl, "Querydsl must not be null!");
+        Assert.notNull(queryFactory, "QueryFactory must not be null!");
     }
 
-    protected JPAQueryFactory getQueryFactory () {
+    protected JPAQueryFactory getQueryFactory() {
         return queryFactory;
     }
 
-    protected Querydsl getQuerydsl () {
+    protected Querydsl getQuerydsl() {
         return querydsl;
     }
 
-    protected EntityManager getEntityManager () {
+    protected EntityManager getEntityManager() {
         return entityManager;
     }
 
-    protected <T> JPAQuery<T> select ( Expression<T> expr ) {
-        return getQueryFactory().select( expr );
+    protected <T> JPAQuery<T> select(Expression<T> expr) {
+        return getQueryFactory().select(expr);
     }
 
-    protected <T> JPAQuery<T> selectFrom ( EntityPath<T> from ) {
-        return getQueryFactory().selectFrom( from );
+    protected <T> JPAQuery<T> selectFrom(EntityPath<T> from) {
+        return getQueryFactory().selectFrom(from);
     }
 
-    protected <T> Page<T> applyPagination ( Pageable pageable, Function<JPAQueryFactory, JPAQuery<T>> contentQuery, JPAQuery<Long> countQuery ) {
-        JPAQuery<T> jpaQuery = contentQuery.apply( getQueryFactory() );
-        List<T> content = getQuerydsl().applyPagination( pageable, jpaQuery ).fetch();
-        return PageableExecutionUtils.getPage( content, pageable, countQuery::fetchOne );
+    protected <T> Page<T> applyPagination(Pageable pageable, Function<JPAQueryFactory, JPAQuery<T>> contentQuery, JPAQuery<Long> countQuery) {
+        JPAQuery<T> jpaQuery = contentQuery.apply(getQueryFactory());
+        List<T> content = getQuerydsl().applyPagination(pageable, jpaQuery).fetch();
+        return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchOne);
     }
 
-    protected <T> List<T> applyNoPagination ( Function<JPAQueryFactory, JPAQuery<T>> contentQuery ) {
-        JPAQuery<T> jpaQuery = contentQuery.apply( getQueryFactory() );
+    protected <T> List<T> applyNoPagination(Function<JPAQueryFactory, JPAQuery<T>> contentQuery) {
+        JPAQuery<T> jpaQuery = contentQuery.apply(getQueryFactory());
         return jpaQuery.fetch();
     }
 
-    protected <T> Predicate condition ( T value, Function<T, Predicate> function ) {
-        return Optional.ofNullable( value.equals( "" ) ? null : value ).map( function ).orElse( null );
+    protected <T> Predicate condition(T value, Function<T, Predicate> function) {
+        return Optional.ofNullable(value.equals("") ? null : value).map(function).orElse(null);
     }
 
 }

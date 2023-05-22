@@ -3,7 +3,6 @@ package com.sgyj.commonservice.dto;
 import com.sgyj.commonservice.enums.AccountRole;
 import com.sgyj.commonservice.enums.LoginType;
 import com.sgyj.commonservice.enums.TravelTheme;
-import com.sgyj.commonservice.security.Jwt;
 import java.time.LocalDateTime;
 import java.util.Set;
 import lombok.Data;
@@ -26,7 +25,7 @@ public class AccountDto {
     /** 가입일자 */
     protected LocalDateTime joinedAt;
     /** 권한 */
-    protected Set<AccountRole> roles = Set.of( AccountRole.USER );
+    protected Set<AccountRole> roles = Set.of(AccountRole.USER);
     /** 로그인 횟수 */
     protected int loginCount;
     /** 마지막 로그인 일자 */

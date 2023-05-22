@@ -20,42 +20,42 @@ public class Jwt {
 
     private final JWTVerifier jwtVerifier;
 
-    public Jwt ( String issuer, String secretKey ) {
+    public Jwt(String issuer, String secretKey) {
         this.issuer = issuer;
-        this.algorithm = Algorithm.HMAC512( secretKey );
-        this.jwtVerifier = JWT.require( algorithm ).withIssuer( issuer ).build();
+        this.algorithm = Algorithm.HMAC512(secretKey);
+        this.jwtVerifier = JWT.require(algorithm).withIssuer(issuer).build();
     }
 
-    public String createToken ( Claims claims, long expireTime ) {
+    public String createToken(Claims claims, long expireTime) {
         Date now = new Date();
         JWTCreator.Builder builder = JWT.create();
-        builder.withIssuer( issuer );
-        builder.withIssuedAt( now );
-        builder.withExpiresAt( new Date( now.getTime() + expireTime ) );
-        builder.withClaim( JwtInfo.ACCOUNT_ID.name(), claims.id);
-        builder.withClaim( JwtInfo.EMAIL.name(), claims.email );
-        builder.withArrayClaim( JwtInfo.ROLES.name(), claims.roles );
-        return builder.sign( algorithm );
+        builder.withIssuer(issuer);
+        builder.withIssuedAt(now);
+        builder.withExpiresAt(new Date(now.getTime() + expireTime));
+        builder.withClaim(JwtInfo.ACCOUNT_ID.name(), claims.id);
+        builder.withClaim(JwtInfo.EMAIL.name(), claims.email);
+        builder.withArrayClaim(JwtInfo.ROLES.name(), claims.roles);
+        return builder.sign(algorithm);
     }
 
-    public String createAccessToken ( Claims claims ) {
+    public String createAccessToken(Claims claims) {
         // 5분 동안만 토큰 유효
         long tokenValidationSecond = 1000L * 60 * 5;
-        return createToken( claims, tokenValidationSecond );
+        return createToken(claims, tokenValidationSecond);
     }
 
-    public String createRefreshToken ( Claims claims ) {
+    public String createRefreshToken(Claims claims) {
         // 30분 동안 유효한 리프레시 토큰
         long refreshTokenValidationSecond = 1000L * 60 * 30;
-        return createToken( claims, refreshTokenValidationSecond );
+        return createToken(claims, refreshTokenValidationSecond);
     }
 
-    public Claims verify ( String token ) throws JWTVerificationException {
-        return new Claims( jwtVerifier.verify( token ) );
+    public Claims verify(String token) throws JWTVerificationException {
+        return new Claims(jwtVerifier.verify(token));
     }
 
-    public boolean validateToken ( String token ) {
-        return verify( token ).id != null;
+    public boolean validateToken(String token) {
+        return verify(token).id != null;
     }
 
     @Data
@@ -68,30 +68,30 @@ public class Jwt {
         Date iat;
         Date exp;
 
-        private Claims () {/*empty*/}
+        private Claims() {/*empty*/}
 
-        Claims ( DecodedJWT decodedJWT ) {
-            Claim idClaim = decodedJWT.getClaim( JwtInfo.ID.name() );
-            if ( !idClaim.isNull() ) {
+        Claims(DecodedJWT decodedJWT) {
+            Claim idClaim = decodedJWT.getClaim(JwtInfo.ID.name());
+            if (!idClaim.isNull()) {
                 this.id = idClaim.asLong();
             }
-            Claim accountIdClaim = decodedJWT.getClaim( JwtInfo.ACCOUNT_ID.name() );
-            if ( !accountIdClaim.isNull() ) {
+            Claim accountIdClaim = decodedJWT.getClaim(JwtInfo.ACCOUNT_ID.name());
+            if (!accountIdClaim.isNull()) {
                 this.email = accountIdClaim.asString();
             }
-            Claim emailClaim = decodedJWT.getClaim( JwtInfo.EMAIL.name() );
-            if ( !emailClaim.isNull() ) {
+            Claim emailClaim = decodedJWT.getClaim(JwtInfo.EMAIL.name());
+            if (!emailClaim.isNull()) {
                 this.email = emailClaim.asString();
             }
-            Claim rolesClaim = decodedJWT.getClaim( JwtInfo.ROLES.name() );
-            if ( !rolesClaim.isNull() ) {
-                this.roles = rolesClaim.asArray( String.class );
+            Claim rolesClaim = decodedJWT.getClaim(JwtInfo.ROLES.name());
+            if (!rolesClaim.isNull()) {
+                this.roles = rolesClaim.asArray(String.class);
             }
             this.iat = decodedJWT.getIssuedAt();
             this.exp = decodedJWT.getExpiresAt();
         }
 
-        public static Claims of ( long userKey, String accountId,  String name, String[] roles ) {
+        public static Claims of(long userKey, String accountId, String name, String[] roles) {
             Claims claims = new Claims();
             claims.id = userKey;
             claims.accountId = accountId;
