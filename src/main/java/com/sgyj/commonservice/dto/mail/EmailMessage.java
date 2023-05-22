@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class EmailMessage {
 
-    private Long accountId;
+    private String accountId;
 
     private String to;
 
@@ -19,7 +19,7 @@ public class EmailMessage {
         return mailSubject.getSubject();
     }
 
-    public String getHtmlCode() {
+    public String getHtmlFileName() {
         return mailSubject.getHtmlFileName();
     }
 
