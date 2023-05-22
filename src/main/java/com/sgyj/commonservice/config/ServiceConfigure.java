@@ -10,7 +10,7 @@ public class ServiceConfigure {
 
     @Bean
     public Jwt jwt(JwtProperties jwtProperties) {
-        return new Jwt(jwtProperties.getIssuer(), jwtProperties.getSecret());
+        return new Jwt(jwtProperties.getIssuer(), jwtProperties.getClientSecret());
     }
 
 }
