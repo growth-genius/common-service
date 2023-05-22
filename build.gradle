@@ -14,7 +14,7 @@ plugins {
 }
 
 group = 'com.sgyj'
-version = '1.0.2'
+version = '1.0.9'
 sourceCompatibility = '17'
 
 configurations {
@@ -36,7 +36,6 @@ publishing {
             groupId group
             artifactId project.name
             version version
-
             artifact("build/libs/$project.name-$version" + ".jar") {
                 extension 'jar'
             }

@@ -1,4 +1,4 @@
-package com.sgyj.commonservice.dto;
+package com.sgyj.commonservice.dto.account;
 
 import com.sgyj.commonservice.enums.AccountRole;
 import com.sgyj.commonservice.enums.LoginType;
