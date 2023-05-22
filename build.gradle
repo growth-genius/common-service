@@ -14,7 +14,7 @@ plugins {
 }
 
 group = 'com.sgyj'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.7'
 sourceCompatibility = '17'
 
 configurations {
@@ -22,6 +22,13 @@ configurations {
         extendsFrom annotationProcessor
     }
 }
+bootJar.enabled = false // 실행가능한 아카이브로 main-class 가 있는 모듈인경우
+jar.enabled = true // PLAIN 으로 생성 실행이 불가능한 일반 아카이브
+
+jar { // 배포할 jar 이름
+    archiveName("${project.name}-${version}.jar")
+}
+
 
 publishing {
     publications {
@@ -41,7 +48,7 @@ publishing {
                 username = repoUsername
                 password = repoPassword
             }
-            def releasesRepoUrl = nexusBaseUrl + "/tgather-releases"
+            def releasesRepoUrl = nexusBaseUrl + "/tgather-release"
             def snapshotsRepoUrl = nexusBaseUrl + "/tgather-snapshot"
             url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
             allowInsecureProtocol = true    // http 허용, https로 변경하면 필요없음.
