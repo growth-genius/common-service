@@ -14,7 +14,7 @@ plugins {
 }
 
 group = 'com.sgyj'
-version = '1.0.9'
+version = '1.0.6'
 sourceCompatibility = '17'
 
 configurations {
@@ -28,7 +28,6 @@ jar.enabled = true // PLAIN 으로 생성 실행이 불가능한 일반 아카�
 jar { // 배포할 jar 이름
     archiveName("${project.name}-${version}.jar")
 }
-
 
 publishing {
     publications {
