@@ -1,5 +1,6 @@
 package com.sgyj.commonservice.enums;
 
+
 public enum AccountRole implements EnumMapperType {
 
     ADMIN("관리자", false),  // 관리자
@@ -16,17 +17,17 @@ public enum AccountRole implements EnumMapperType {
     }
 
     @Override
-    public String getCode () {
+    public String getCode() {
         return this.name();
     }
 
     @Override
-    public String getTitle () {
+    public String getTitle() {
         return this.role;
     }
 
     @Override
-    public boolean isDefault () {
+    public boolean isDefault() {
         return this.active;
     }
 }

@@ -17,6 +17,6 @@ public class UpdatedEntity extends CreatedEntity {
     private LocalDateTime lastModifiedAt;
 
     @LastModifiedBy
-    private Long lastModifiedBy;
+    private String lastModifiedBy;
 
 }

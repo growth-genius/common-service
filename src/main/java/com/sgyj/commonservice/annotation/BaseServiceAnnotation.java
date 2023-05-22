@@ -9,6 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-@Target( ElementType.TYPE )
-@Retention( RetentionPolicy.RUNTIME )
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface BaseServiceAnnotation {}

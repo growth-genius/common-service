@@ -11,12 +11,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @MappedSuperclass
-@EntityListeners( AuditingEntityListener.class)
+@EntityListeners(AuditingEntityListener.class)
 public class CreatedEntity {
 
     @CreatedBy
     @Column(updatable = false)
-    private Long createdBy;
+    private String createdBy;
 
     @CreatedDate
     @Column(updatable = false)

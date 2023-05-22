@@ -2,12 +2,12 @@ package com.sgyj.commonservice.advice.exceptions;
 
 public class ExpiredTokenException extends RuntimeException {
 
-    public ExpiredTokenException () {
-        super( "토큰이 만료되었습니다." );
+    public ExpiredTokenException() {
+        super("토큰이 만료되었습니다.");
     }
 
-    public ExpiredTokenException ( String s ) {
-        super( s );
+    public ExpiredTokenException(String s) {
+        super(s);
     }
 
 }

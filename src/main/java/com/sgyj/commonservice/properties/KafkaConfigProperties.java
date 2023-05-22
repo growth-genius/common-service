@@ -1,14 +1,14 @@
 package com.sgyj.commonservice.properties;
 
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Getter
 @Setter
-@ConfigurationProperties("app")
-public class AppProperties {
+@ConfigurationProperties("kafka")
+public class KafkaConfigProperties {
 
-    List<String> hosts;
+    private String bootstrapServersConfig;
+
 }
