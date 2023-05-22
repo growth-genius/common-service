@@ -13,7 +13,7 @@ public class JwtProperties {
 
     private String issuer;
 
-    private String secret;
+    private String clientSecret;
 
     private String tokenValidityInMilliseconds;
 }

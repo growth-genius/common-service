@@ -3,7 +3,7 @@ package com.sgyj.commonservice.security;
 import static com.sgyj.commonservice.utils.CommonUtil.authorities;
 
 import com.sgyj.commonservice.advice.exceptions.NotFoundException;
-import com.sgyj.commonservice.dto.AccountDto;
+import com.sgyj.commonservice.dto.account.AccountDto;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.AuthenticationServiceException;
