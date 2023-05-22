@@ -20,7 +20,7 @@ public class EmailMessage {
     }
 
     public String getHtmlCode() {
-        return mailSubject.getHtmlCode();
+        return mailSubject.getHtmlFileName();
     }
 
     public EmailType getEmailType() {
