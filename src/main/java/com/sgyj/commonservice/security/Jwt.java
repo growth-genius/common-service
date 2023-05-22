@@ -32,7 +32,7 @@ public class Jwt {
         builder.withIssuer( issuer );
         builder.withIssuedAt( now );
         builder.withExpiresAt( new Date( now.getTime() + expireTime ) );
-        builder.withClaim( JwtInfo.ACCOUNT_ID.name(), claims.accountId );
+        builder.withClaim( JwtInfo.ACCOUNT_ID.name(), claims.id);
         builder.withClaim( JwtInfo.EMAIL.name(), claims.email );
         builder.withArrayClaim( JwtInfo.ROLES.name(), claims.roles );
         return builder.sign( algorithm );
@@ -55,13 +55,14 @@ public class Jwt {
     }
 
     public boolean validateToken ( String token ) {
-        return verify( token ).accountId != null;
+        return verify( token ).id != null;
     }
 
     @Data
     public static class Claims {
 
-        Long accountId;
+        Long id;
+        String accountId;
         String email;
         String[] roles;
         Date iat;
@@ -70,9 +71,13 @@ public class Jwt {
         private Claims () {/*empty*/}
 
         Claims ( DecodedJWT decodedJWT ) {
+            Claim idClaim = decodedJWT.getClaim( JwtInfo.ID.name() );
+            if ( !idClaim.isNull() ) {
+                this.id = idClaim.asLong();
+            }
             Claim accountIdClaim = decodedJWT.getClaim( JwtInfo.ACCOUNT_ID.name() );
             if ( !accountIdClaim.isNull() ) {
-                this.accountId = accountIdClaim.asLong();
+                this.email = accountIdClaim.asString();
             }
             Claim emailClaim = decodedJWT.getClaim( JwtInfo.EMAIL.name() );
             if ( !emailClaim.isNull() ) {
@@ -86,9 +91,10 @@ public class Jwt {
             this.exp = decodedJWT.getExpiresAt();
         }
 
-        public static Claims of ( long userKey, String name, String[] roles ) {
+        public static Claims of ( long userKey, String accountId,  String name, String[] roles ) {
             Claims claims = new Claims();
-            claims.accountId = userKey;
+            claims.id = userKey;
+            claims.accountId = accountId;
             claims.email = name;
             claims.roles = roles;
             return claims;

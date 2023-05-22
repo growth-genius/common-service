@@ -16,7 +16,7 @@ public class CreatedEntity {
 
     @CreatedBy
     @Column(updatable = false)
-    private Long createdBy;
+    private String createdBy;
 
     @CreatedDate
     @Column(updatable = false)

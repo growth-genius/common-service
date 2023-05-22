@@ -11,9 +11,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LoginAccountAuditorAware implements AuditorAware<Long> {
+public class LoginAccountAuditorAware implements AuditorAware<String> {
     @Override
-    public Optional<Long> getCurrentAuditor() {
+    public Optional<String> getCurrentAuditor() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if ( authentication == null || !authentication.isAuthenticated() ) {
             return Optional.empty();
