@@ -14,7 +14,7 @@ plugins {
 }
 
 group = 'com.sgyj'
-version = '1.0.6'
+version = '1.0.9'
 sourceCompatibility = '17'
 
 configurations {
@@ -77,6 +77,9 @@ dependencies {
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
     implementation group: 'com.auth0', name: 'java-jwt', version: '3.18.2'
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
+
+    // swagger
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
 
     //querydsl 추가
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
