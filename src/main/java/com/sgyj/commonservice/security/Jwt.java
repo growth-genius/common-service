@@ -32,7 +32,8 @@ public class Jwt {
         builder.withIssuer(issuer);
         builder.withIssuedAt(now);
         builder.withExpiresAt(new Date(now.getTime() + expireTime));
-        builder.withClaim(JwtInfo.ACCOUNT_ID.name(), claims.id);
+        builder.withClaim(JwtInfo.ACCOUNT_ID.name(), claims.accountId);
+        builder.withClaim(JwtInfo.ID.name(), claims.id);
         builder.withClaim(JwtInfo.EMAIL.name(), claims.email);
         builder.withArrayClaim(JwtInfo.ROLES.name(), claims.roles);
         return builder.sign(algorithm);
