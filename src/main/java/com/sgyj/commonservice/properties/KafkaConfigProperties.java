@@ -10,5 +10,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class KafkaConfigProperties {
 
     private String bootstrapServersConfig;
-
+    private String groupIdConfig;
+    
 }

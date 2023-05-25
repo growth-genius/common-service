@@ -13,8 +13,8 @@ plugins {
     id 'jacoco'
 }
 
-group = 'com.sgyj'
-version = '1.0.9'
+group = 'com.gg'
+version = '1.0.0'
 sourceCompatibility = '17'
 
 configurations {
