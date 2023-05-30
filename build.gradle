@@ -11,6 +11,7 @@ plugins {
     id 'maven-publish'
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     id 'jacoco'
+    id 'nu.studer.credentials' version '3.0'
 }
 
 group = 'com.gg'
@@ -29,6 +30,11 @@ jar { // 배포할 jar 이름
     archiveName("${project.name}-${version}.jar")
 }
 
+
+String repoUsername = credentials.forKey('repoUsername')
+String repoPassword = credentials.forKey('repoPassword')
+String nexusBaseUrl = credentials.forKey('nexusBaseUrl')
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -42,7 +48,7 @@ publishing {
     }
     repositories {
         maven {
-            credentials {
+            credentials(PasswordCredentials) {
                 username = repoUsername
                 password = repoPassword
             }
@@ -57,9 +63,9 @@ publishing {
 repositories {
     mavenCentral()
     maven {
-        credentials {
-            username = repoUsername    // System.getenv("NEXUS_ID") : 추후 하드코딩이 아닌 환경설정으로 처리
-            password = repoPassword   // System.getenv("NEXUS_PASSWORD")
+        credentials(PasswordCredentials) {
+            username = repoUsername
+            password = repoPassword
         }
         url "${nexusBaseUrl}/tgather-public/"
         allowInsecureProtocol = true    // http 허용, https로 변경하면 필요없음.
