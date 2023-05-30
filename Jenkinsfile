@@ -12,6 +12,7 @@ node {
         stage('gradle credentials') {
             sh(script: "../gradleCredentials/credentials.sh")
         }
+
         stage('git source Pull') {
             checkout scm
         }
