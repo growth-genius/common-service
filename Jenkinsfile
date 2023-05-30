@@ -9,6 +9,9 @@ node {
             sh(script: "git config --global http.sslVerify false || true")
         }
 
+        stage('gradle credentials') {
+            sh(script: "../gradleCredentials/credentials.sh")
+        }
         stage('git source Pull') {
             checkout scm
         }

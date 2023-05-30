@@ -12,7 +12,6 @@ public class ServiceConfigure {
 
     @Bean
     public Jwt jwt(JwtProperties jwtProperties) {
-        log.error("jwt properties.issuer :: {}", jwtProperties.getIssuer());
         return new Jwt(jwtProperties.getIssuer(), jwtProperties.getClientSecret());
     }
 
