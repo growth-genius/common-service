@@ -78,7 +78,7 @@ public class Jwt {
             }
             Claim accountIdClaim = decodedJWT.getClaim(JwtInfo.ACCOUNT_ID.name());
             if (!accountIdClaim.isNull()) {
-                this.email = accountIdClaim.asString();
+                this.accountId = accountIdClaim.asString();
             }
             Claim emailClaim = decodedJWT.getClaim(JwtInfo.EMAIL.name());
             if (!emailClaim.isNull()) {
