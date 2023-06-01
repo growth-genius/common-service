@@ -14,8 +14,8 @@ plugins {
     id 'nu.studer.credentials' version '3.0'
 }
 
-group = 'com.gg'
-version = '1.0.3'
+group = 'com.gg.tgather'
+version = '1.0.0'
 sourceCompatibility = '17'
 
 configurations {
