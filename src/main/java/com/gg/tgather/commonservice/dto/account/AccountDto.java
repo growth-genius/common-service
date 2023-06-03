@@ -44,4 +44,11 @@ public class AccountDto {
     protected int birth;
     /** 여행 테마 */
     protected Set<TravelTheme> travelThemes;
+
+    private AccountDto() {}
+
+    public static AccountDto create() {
+        return new AccountDto();
+    }
+    
 }
