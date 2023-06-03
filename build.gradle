@@ -15,7 +15,7 @@ plugins {
 }
 
 group = 'com.gg.tgather'
-version = '1.0.2'
+version = '1.0.3'
 sourceCompatibility = '17'
 
 configurations {
@@ -96,12 +96,15 @@ dependencies {
     annotationProcessor "jakarta.annotation:jakarta.annotation-api"
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
-    // https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka-test
-    testImplementation 'org.springframework.kafka:spring-kafka-test:3.0.4'
-    testImplementation 'org.testcontainers:kafka:1.17.6'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
+
+    // https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka-test
+    testImplementation 'org.springframework.kafka:spring-kafka-test:3.0.4'
+    testImplementation 'org.testcontainers:kafka:1.17.6'
+    testImplementation 'org.testcontainers:postgresql'
+    testCompileOnly 'org.projectlombok:lombok' // 테스트 의존성 추가
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 }
