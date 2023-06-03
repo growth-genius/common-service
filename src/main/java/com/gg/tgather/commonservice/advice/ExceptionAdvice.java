@@ -4,6 +4,7 @@ import static com.gg.tgather.commonservice.utils.ApiUtil.fail;
 
 import com.gg.tgather.commonservice.advice.exceptions.BadRequestException;
 import com.gg.tgather.commonservice.advice.exceptions.ExpiredTokenException;
+import com.gg.tgather.commonservice.advice.exceptions.OmittedRequireFieldException;
 import com.gg.tgather.commonservice.utils.ApiUtil;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,7 @@ public class ExceptionAdvice {
     protected ResponseEntity<ApiUtil.ApiResult<?>> defaultException(Exception e) {
         log.error("defaultException : {} ", e.getMessage());
         e.printStackTrace();
-        return newResponse(e, HttpStatus.UNPROCESSABLE_ENTITY);
+        return newResponse(e, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({ExpiredTokenException.class})
@@ -53,6 +54,11 @@ public class ExceptionAdvice {
             return newResponse(methodargumentnotvalidexception.getBindingResult().getAllErrors().get(0).getDefaultMessage(), HttpStatus.BAD_REQUEST);
         }
         return newResponse(e, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(OmittedRequireFieldException.class)
+    public ResponseEntity<?> handleOmittedRequireFieldException(OmittedRequireFieldException omittedRequireFieldException) {
+        return newResponse(omittedRequireFieldException, HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
