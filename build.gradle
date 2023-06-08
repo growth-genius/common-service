@@ -15,7 +15,7 @@ plugins {
 }
 
 group = 'com.gg.tgather'
-version = '1.0.7'
+version = '1.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 configurations {
