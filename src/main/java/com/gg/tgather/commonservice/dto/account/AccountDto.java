@@ -38,6 +38,8 @@ public class AccountDto {
     protected String accessToken;
     /** 재발급 토큰 */
     protected String refreshToken;
+    /** fcm 토큰 */
+    protected String fcmToken;
     /** 나이 */
     protected int age;
     /** 생년월 */
