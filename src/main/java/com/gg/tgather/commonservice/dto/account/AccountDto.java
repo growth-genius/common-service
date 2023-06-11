@@ -47,8 +47,6 @@ public class AccountDto {
     /** 여행 테마 */
     protected Set<TravelTheme> travelThemes;
 
-    public AccountDto() {}
-
     public static AccountDto create() {
         return new AccountDto();
     }
