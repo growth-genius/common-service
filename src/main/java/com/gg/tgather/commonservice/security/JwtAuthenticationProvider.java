@@ -24,7 +24,7 @@ public interface JwtAuthenticationProvider extends AuthenticationProvider {
             AccountDto accountDto = getAccountDto(principal, credential);
             CredentialInfo credentialInfo = new CredentialInfo(accountDto.getPassword(), accountDto.getLoginType());
             JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken(
-                new JwtAuthentication(accountDto.getId(), accountDto.getAccountId(), accountDto.getEmail()), credentialInfo,
+                new JwtAuthentication(accountDto.getId(), accountDto.getAccountId(), accountDto.getEmail(), accountDto.getNickname()), credentialInfo,
                 CommonUtil.authorities(accountDto.getRoles()));
             authenticationToken.setDetails(accountDto);
             return authenticationToken;
