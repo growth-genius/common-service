@@ -62,12 +62,13 @@ public class Jwt {
     @Data
     public static class Claims {
 
-        Long id;
-        String accountId;
-        String email;
-        String[] roles;
-        Date iat;
-        Date exp;
+        private Long id;
+        private String accountId;
+        private String email;
+        private String nickname;
+        private String[] roles;
+        private Date iat;
+        private Date exp;
 
         private Claims() {/*empty*/}
 
@@ -92,11 +93,12 @@ public class Jwt {
             this.exp = decodedJWT.getExpiresAt();
         }
 
-        public static Claims of(long userKey, String accountId, String name, String[] roles) {
+        public static Claims of(long userKey, String accountId, String email, String nickname, String[] roles) {
             Claims claims = new Claims();
             claims.id = userKey;
             claims.accountId = accountId;
-            claims.email = name;
+            claims.email = email;
+            claims.nickname = nickname;
             claims.roles = roles;
             return claims;
         }
