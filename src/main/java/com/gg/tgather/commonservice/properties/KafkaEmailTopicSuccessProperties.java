@@ -6,10 +6,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Getter
 @Setter
-@ConfigurationProperties("kafka.email-topic")
-public class KafkaEmailTopicProperties {
+@ConfigurationProperties("kafka.email-topic.success")
+public class KafkaEmailTopicSuccessProperties {
 
-    private String sendEmailFailTopic;
-    private String sendEmailSuccessTopic;
+    private String sendAuthenticationMailSuccessTopic;
 
 }
