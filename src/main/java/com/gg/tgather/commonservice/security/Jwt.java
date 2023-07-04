@@ -47,7 +47,7 @@ public class Jwt {
 
     public String createRefreshToken(Claims claims) {
         // 30분 동안 유효한 리프레시 토큰
-        long refreshTokenValidationSecond = 1000L * 60 * 30;
+        long refreshTokenValidationSecond = 1000L * 60 * 60 * 24;
         return createToken(claims, refreshTokenValidationSecond);
     }
 
