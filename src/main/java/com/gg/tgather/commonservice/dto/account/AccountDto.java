@@ -1,5 +1,6 @@
 package com.gg.tgather.commonservice.dto.account;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gg.tgather.commonservice.enums.AccountRole;
 import com.gg.tgather.commonservice.enums.LoginType;
 import com.gg.tgather.commonservice.enums.TravelTheme;
@@ -21,6 +22,7 @@ public class AccountDto {
     /* 사용자 별명 */
     protected String nickname;
     /* 패스워드*/
+    @JsonIgnore
     protected String password;
     /** 가입일자 */
     protected LocalDateTime joinedAt;
